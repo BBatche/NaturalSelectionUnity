@@ -6,17 +6,48 @@ using NaturalSelectionUnity.Models.Simulation;
 using System;
 using System.Threading.Tasks;
 using System.Net.Http;
+using UnityEngine.Networking;
+using TMPro;
 public class APIService : MonoBehaviour
 {
     private readonly HttpClient _httpClient;
 
-    private static readonly string baseURL = "https://localhost:7075/api/";
+    private static readonly string baseURL = "http://localhost:5073/api/";
 
-    private static readonly string simApiUrl = "https://localhost:7075/api/Simulations";
+    public static readonly string simApiUrl = "http://localhost:5073/api/Simulations";
+
+    public TextMeshProUGUI text;
+
     private void Start()
     {
         
     }
+
+    public IEnumerator GetSimulationRequest(string url)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(String.Format("Something went wrong", webRequest.error));
+                    break;
+                case UnityWebRequest.Result.Success:
+                    List<Simulation> simData = JsonConvert.DeserializeObject<List<Simulation>>(webRequest.downloadHandler.text);
+                    foreach (Simulation sim in simData)
+                    {
+                        text.text = sim.SimulationId.ToString() + " " +  sim.UserEmail;
+                    }
+                    break;
+            }
+        }
+
+
+    }
+    /*
     public APIService() { 
         
         _httpClient = new HttpClient();
@@ -27,6 +58,7 @@ public class APIService : MonoBehaviour
     {
         Debug.Log("In method");
         string apiUrl = simApiUrl;
+        
 
         List<Simulation> sim = null; 
         using (HttpClient client = new HttpClient())
@@ -50,7 +82,7 @@ public class APIService : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.Log("Error: " + ex.Message);
+                Debug.Log("Error: " + ex.StackTrace);
                 return null;
             }
             Debug.Log("return sim");
@@ -62,4 +94,5 @@ public class APIService : MonoBehaviour
     {
         Debug.Log("Hi");
     }
+    */
 }
