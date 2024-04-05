@@ -6,6 +6,6 @@ public class ButtonGetUrl : MonoBehaviour
 {
     public void OnButtonClick()
     {
-        Application.OpenURL("http://localhost:5073/api/Simulations");
+        Application.OpenURL("http://localhost:5073/api/Simulations/ExportSim");
     }
 }
