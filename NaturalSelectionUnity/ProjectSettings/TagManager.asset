@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Border
+  - Bug
+  - KillZone
   layers:
   - Default
   - TransparentFX
@@ -43,6 +46,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3556143779
+    locked: 0
+  - name: Layout
+    uniqueID: 3202645193
     locked: 0
   - name: UI
     uniqueID: 1267526249

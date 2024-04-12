@@ -35,6 +35,12 @@ public class SettingsScript : MonoBehaviour
     TMP_InputField inputField;
     [SerializeField]
     TMP_InputField emailField;
+    [SerializeField]
+    TMP_InputField initialBB;
+    [SerializeField]
+    TMP_InputField initialBb;
+    [SerializeField]
+    TMP_InputField initialbb;
     // Start is called before the first frame update
     void Start()
     {
@@ -191,5 +197,35 @@ public class SettingsScript : MonoBehaviour
     public void ManyKillZones()
     {
         gameState.isManySelected = true;
+    }
+
+    public void ReadBB()
+    {
+        // Check if the input field is not null and not empty
+        if (initialBB != null && !string.IsNullOrEmpty(initialBB.text))
+        {
+            // Parse the text to an integer and assign it to the gameState variable
+            gameState.initialBB = int.Parse(initialBB.text);
+        }
+    }
+
+    public void ReadBb()
+    {
+        // Check if the input field is not null and not empty
+        if (initialBb != null && !string.IsNullOrEmpty(initialBb.text))
+        {
+            // Parse the text to an integer and assign it to the gameState variable
+            gameState.initialBb = int.Parse(initialBb.text);
+        }
+    }
+
+    public void Readbb()
+    {
+        // Check if the input field is not null and not empty
+        if (initialbb != null && !string.IsNullOrEmpty(initialbb.text))
+        {
+            // Parse the text to an integer and assign it to the gameState variable
+            gameState.initialbb = int.Parse(initialbb.text);
+        }
     }
 }

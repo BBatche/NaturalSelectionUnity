@@ -17,8 +17,11 @@ MonoBehaviour:
   isRandomSelected: 0
   isManySelected: 0
   initalPopSize: 0
+  initialBB: 15
+  initialBb: 15
+  initialbb: 15
   maxPopSize: 200
-  simStarted: 0
-  speed: 1.5
-  userEmail: 
-  simulationID: b3bc1ba9-23f7-4b41-a811-1f5e43cde600
+  simStarted: 1
+  speed: 3
+  userEmail: fdhgsfdah
+  simulationID: 3275d1e6-3f24-44cd-a74d-272335a59f09
