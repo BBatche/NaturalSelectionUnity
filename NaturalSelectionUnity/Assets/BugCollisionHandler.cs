@@ -4,6 +4,8 @@ using UnityEngine;
 using static BugAlleleScript;
 public class BugCollisionHandler : MonoBehaviour
 {
+    [SerializeField]
+    GameState gameState;
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the bug collided with a border object
@@ -17,6 +19,27 @@ public class BugCollisionHandler : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("KillZone"))
         {
+            gameState.killedByKillZone++;
+            gameState.currentPop--;
+            BugAlleleScript bugAlleleScript = GetComponent<BugAlleleScript>();
+            if (bugAlleleScript != null)
+            {
+                AlleleType bugType = bugAlleleScript.getAlleleType();
+
+                switch (bugType)
+                {
+                    case AlleleType.Dom:
+                        gameState.currentDom--;
+                        break;
+                    case AlleleType.Mid:
+                        gameState.currentMid--;
+                        break;
+                    case AlleleType.Rec:
+                        gameState.currentRec--;
+                        break;
+                }
+            }
+            
             Destroy(gameObject);
         }
         

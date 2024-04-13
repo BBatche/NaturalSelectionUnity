@@ -4,6 +4,8 @@ using UnityEngine;
 using static BugAlleleScript;
 public class BugReproductionScript : MonoBehaviour
 {
+    [SerializeField]
+    GameState gameState;
     public GameObject bugPrefab;
     public float reproductionCooldown = 1f; // Cooldown period for bug reproduction
     private float reproductionTimer = 0f; // Timer for tracking reproduction cooldown
@@ -26,8 +28,22 @@ public class BugReproductionScript : MonoBehaviour
                 // Determine alleles of the offspring based on Punnett square
                 AlleleType offspringAllele = DetermineOffspringAllele(GetComponent<BugAlleleScript>().alleleType, otherBug.GetComponent<BugAlleleScript>().alleleType);
 
+                gameState.currentPop++;
+                switch (offspringAllele)
+                {
+                    case AlleleType.Dom:
+                        gameState.currentDom++;
+                        break;
+                    case AlleleType.Mid:
+                        gameState.currentMid++;
+                        break;
+                    case AlleleType.Rec:
+                        gameState.currentRec++;
+                        break;
+                }
                 // Spawn a new bug with the determined alleles near the collision point
                 SpawnOffspringBug(offspringAllele, collision.contacts[0].point);
+
 
                 // Reset reproduction cooldown timer for this bug
                 reproductionTimer = 0f;
@@ -118,13 +134,13 @@ public class BugReproductionScript : MonoBehaviour
         switch (allele)
         {
             case AlleleType.Dom:
-                offspringBug.GetComponent<Renderer>().material.color = Color.red;
+                offspringBug.GetComponent<Renderer>().material.color = gameState.domColor;
                 break;
             case AlleleType.Mid:
-                offspringBug.GetComponent<Renderer>().material.color = Color.green;
+                offspringBug.GetComponent<Renderer>().material.color = gameState.domColor;
                 break;
             case AlleleType.Rec:
-                offspringBug.GetComponent<Renderer>().material.color = Color.blue;
+                offspringBug.GetComponent<Renderer>().material.color = gameState.recColor;
                 break;
         }
     }

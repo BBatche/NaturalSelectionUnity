@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -2936032256984020591}
   - component: {fileID: 7611220738307049203}
   - component: {fileID: -3238270455448835577}
+  - component: {fileID: 5446999311634350821}
   m_Layer: 0
   m_Name: Bug
   m_TagString: Bug
@@ -34,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.7, y: -0.8, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 396833981
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fcbef4c7ca3a14898327ea78b7d8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: 5199c533a8bfeff4695a013c86b35072, type: 2}
 --- !u!114 &-2936032256984020591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0acaea80e8a284b9ffd8ae8a1ba79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: 5199c533a8bfeff4695a013c86b35072, type: 2}
 --- !u!114 &7611220738307049203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,5 +220,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520d326cd49deb047bccf07c0fd8bce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: 5199c533a8bfeff4695a013c86b35072, type: 2}
   bugPrefab: {fileID: 5434217660543872016}
   reproductionCooldown: 5
+--- !u!114 &5446999311634350821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5434217660543872016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693219520eed58442a44596558cb12c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: 5199c533a8bfeff4695a013c86b35072, type: 2}

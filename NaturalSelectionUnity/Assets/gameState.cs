@@ -24,4 +24,14 @@ public class GameState : ScriptableObject
         Bb,
         bb
     }
+
+    public int currentPop = 0;
+    public int currentDom = 0;
+    public int currentMid = 0;
+    public int currentRec = 0;
+    public int killedByKillZone = 0;
+    public int killedByPlayer = 0;
+    public int currentGen = 0;
+    public Color domColor = Color.white;
+    public Color recColor = Color.white;
 }
