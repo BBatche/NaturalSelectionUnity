@@ -6,7 +6,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using NaturalSelectionUnity.Models.Settings;
+using UnityEngine.Networking;
+using static System.Net.WebRequestMethods;
+using Newtonsoft.Json;
+using System.Text;
 
 public class SettingsScript : MonoBehaviour
 {
@@ -41,6 +45,8 @@ public class SettingsScript : MonoBehaviour
     TMP_InputField initialBb;
     [SerializeField]
     TMP_InputField initialbb;
+
+    string apiUrl = "http://localhost:5073/api/Settings";
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +75,7 @@ public class SettingsScript : MonoBehaviour
         if (!gameState.simStarted)
         {
             gameState.speed = 1.5f;
-
+            gameState.isFastSelected = false;
             ColorBlock cb = slowButton.colors;
             cb.normalColor = Color.gray;
             slowButton.colors = cb;
@@ -86,7 +92,7 @@ public class SettingsScript : MonoBehaviour
         if (!gameState.simStarted)
         {
             gameState.speed = 3f;
-
+            gameState.isFastSelected = true;
             ColorBlock cb = fastButton.colors;
             cb.normalColor = Color.gray;
             fastButton.colors = cb;
@@ -162,7 +168,53 @@ public class SettingsScript : MonoBehaviour
         gameState.simStarted = true;
         Guid guid = Guid.NewGuid();
         gameState.simulationID = guid.ToString();
+
+        Setting setting = new Setting();
+        CreateSetting(setting);
+        StartCoroutine(PostSettings(setting));
         SceneManager.LoadScene("Simulation Screen");
+
+    }
+
+    private void CreateSetting(Setting setting)
+    {
+        if (gameState.isFastSelected)
+        {
+            setting.MovementSpeed = 3;
+        }
+        else
+        {
+            setting.MovementSpeed = 1;
+        }
+        if (gameState.isManySelected)
+        {
+            setting.KillZones = 6;
+        }
+        else
+        {
+            setting.KillZones = 4;
+        }
+        if (gameState.isRandomSelected)
+        {
+            setting.MovementType = "Random";
+        }
+        else
+        {
+            setting.MovementType = "Linear";
+        }
+        if (gameState.isWhiteSelected)
+        {
+            setting.BackgroundColor = "Light";
+        }
+        else
+        {
+            setting.BackgroundColor = "Dark";
+        }
+        setting.BeginningDominant = gameState.initialBB;
+        setting.BeginningMiddle = gameState.initialBb;
+        setting.BeginningRecessive = gameState.initialbb;
+        setting.UserEmail = gameState.userEmail;
+        setting.BeginningPopulation = (gameState.initialBb + gameState.initialBB + gameState.initialbb);
     }
 
     public void ReadInputField()
@@ -228,4 +280,29 @@ public class SettingsScript : MonoBehaviour
             gameState.initialbb = int.Parse(initialbb.text);
         }
     }
+
+    IEnumerator PostSettings(Setting settings)
+    {
+        string jsonData = JsonConvert.SerializeObject(settings);
+
+        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(apiUrl, "POST"))
+        {
+            // Set the request body
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error posting settings: " + request.error);
+            }
+            else
+            {
+                Debug.Log("Settings saved successfully!");
+            }
+        }
+    }
 }
+

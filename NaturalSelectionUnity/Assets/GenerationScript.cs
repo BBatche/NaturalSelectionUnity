@@ -39,6 +39,8 @@ public class GenerationScript : MonoBehaviour
 
             // Wait for 10 seconds
             yield return waitTime;
+
+            Debug.Log("After 10 seconds");
         }
     }
 }

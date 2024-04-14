@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using UnityEngine.Networking;
 using TMPro;
+using NaturalSelectionUnity.Models.Settings;
 public class APIService : MonoBehaviour
 {
     private readonly HttpClient _httpClient;
@@ -46,6 +47,12 @@ public class APIService : MonoBehaviour
         }
 
 
+    }
+
+    public IEnumerator PostSettingsRequest(string url, string setting)
+    {
+        using(UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(url, setting))
+        { yield return webRequest.SendWebRequest(); }
     }
     /*
     public APIService() { 

@@ -53,8 +53,6 @@ public class BugReproductionScript : MonoBehaviour
 
     AlleleType DetermineOffspringAllele(AlleleType allele1, AlleleType allele2)
     {
-        // Implement Punnett square logic to determine offspring alleles based on parent alleles
-        // This logic will depend on the specific genetics of your bugs
 
         // Dom allele
         if (allele1 == AlleleType.Dom)

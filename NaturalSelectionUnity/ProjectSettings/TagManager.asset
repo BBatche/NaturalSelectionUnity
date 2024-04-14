@@ -50,12 +50,12 @@ TagManager:
   - name: Layout
     uniqueID: 3202645193
     locked: 0
-  - name: UI
-    uniqueID: 1267526249
-    locked: 0
   - name: Game
     uniqueID: 396833981
     locked: 0
   - name: Border
     uniqueID: 3912906435
+    locked: 0
+  - name: UI
+    uniqueID: 1267526249
     locked: 0
