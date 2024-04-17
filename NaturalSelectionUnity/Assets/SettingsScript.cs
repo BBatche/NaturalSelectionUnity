@@ -60,7 +60,31 @@ public class SettingsScript : MonoBehaviour
         gameState.simStarted = false;
         gameState.speed = 1.5f;
         gameState.userEmail = string.Empty;
-        
+
+        gameState.currentPop = 0;
+        gameState.currentDom = 0;
+        gameState.currentMid = 0;
+        gameState.currentRec = 0;
+        gameState.killedByKillZone = 0;
+        gameState.killedByPlayer = 0;
+        gameState.currentGen = 0;
+        gameState.initialBB = 0;
+        gameState.initialBb = 0;
+        gameState.initialbb = 0;
+
+
+
+
+        ColorBlock cb = slowButton.colors;
+        cb.selectedColor = Color.gray;
+        fastButton.colors = cb;
+        slowButton.colors = cb;
+        manyButton.colors = cb;
+        fewButton.colors = cb;
+        randomButton.colors = cb;
+        linearButton.colors = cb;
+        blackButton.colors = cb;
+        whiteButton.colors = cb;
     }
 
 
@@ -76,6 +100,7 @@ public class SettingsScript : MonoBehaviour
         {
             gameState.speed = 1.5f;
             gameState.isFastSelected = false;
+
             ColorBlock cb = slowButton.colors;
             cb.normalColor = Color.gray;
             slowButton.colors = cb;
@@ -138,13 +163,15 @@ public class SettingsScript : MonoBehaviour
         {
             gameState.isWhiteSelected = false;
 
+            ColorBlock cbb = blackButton.colors;
+            cbb.normalColor = Color.gray;
+            blackButton.colors = cbb;
+
             ColorBlock cb = whiteButton.colors;
-            cb.normalColor = Color.gray;
+            cb.normalColor = Color.white;
             whiteButton.colors = cb;
 
-            ColorBlock cbb = blackButton.colors;
-            cbb.normalColor = Color.white;
-            blackButton.colors = cbb;
+            
         }
     }
     public void ChangeColorWhite()
@@ -154,11 +181,11 @@ public class SettingsScript : MonoBehaviour
             gameState.isWhiteSelected = true;
 
             ColorBlock cb = blackButton.colors;
-            cb.normalColor = Color.gray;
+            cb.normalColor = Color.white;
             blackButton.colors = cb;
 
             ColorBlock cbb = whiteButton.colors;
-            cbb.normalColor = Color.white;
+            cbb.normalColor = Color.gray;
             whiteButton.colors = cbb;
         }
     }
@@ -244,11 +271,26 @@ public class SettingsScript : MonoBehaviour
     public void FewKillZones()
     {
         gameState.isManySelected = false;
+        ColorBlock cb = fewButton.colors;
+        cb.normalColor = Color.gray;
+        fewButton.colors = cb;
+
+        ColorBlock cbb = manyButton.colors;
+        cbb.normalColor = Color.white;
+        manyButton.colors = cbb;
     }
 
     public void ManyKillZones()
     {
         gameState.isManySelected = true;
+        ColorBlock cb = manyButton.colors;
+        cb.normalColor = Color.gray;
+        manyButton.colors = cb;
+
+        ColorBlock cbb = fewButton.colors;
+        cbb.normalColor = Color.white;
+        
+        fewButton.colors = cbb;
     }
 
     public void ReadBB()

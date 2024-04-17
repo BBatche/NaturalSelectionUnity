@@ -13,15 +13,24 @@ MonoBehaviour:
   m_Name: GameState
   m_EditorClassIdentifier: 
   isWhiteSelected: 1
-  isFastSelected: 0
+  isFastSelected: 1
   isRandomSelected: 0
   isManySelected: 0
   initalPopSize: 0
-  initialBB: 15
-  initialBb: 15
-  initialbb: 15
+  initialBB: 10
+  initialBb: 25
+  initialbb: 10
   maxPopSize: 200
-  simStarted: 1
-  speed: 3
-  userEmail: fdhgsfdah
-  simulationID: 3275d1e6-3f24-44cd-a74d-272335a59f09
+  simStarted: 0
+  speed: 1.5
+  userEmail: 
+  simulationID: 08682edc-4a3a-429f-bc9c-abcf6a657517
+  currentPop: 505
+  currentDom: 239
+  currentMid: 218
+  currentRec: 48
+  killedByKillZone: 342
+  killedByPlayer: 8
+  currentGen: 11
+  domColor: {r: 0.12156863, g: 0.25490198, b: 0.12941177, a: 1}
+  recColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}

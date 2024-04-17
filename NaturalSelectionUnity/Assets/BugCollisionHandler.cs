@@ -42,6 +42,29 @@ public class BugCollisionHandler : MonoBehaviour
             
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("Bounds"))
+        {
+            gameState.currentPop--;
+            BugAlleleScript bugAlleleScript = GetComponent<BugAlleleScript>();
+            if (bugAlleleScript != null)
+            {
+                AlleleType bugType = bugAlleleScript.getAlleleType();
+
+                switch (bugType)
+                {
+                    case AlleleType.Dom:
+                        gameState.currentDom--;
+                        break;
+                    case AlleleType.Mid:
+                        gameState.currentMid--;
+                        break;
+                    case AlleleType.Rec:
+                        gameState.currentRec--;
+                        break;
+                }
+            }
+            Destroy(gameObject);
+        }
         
     }
     
