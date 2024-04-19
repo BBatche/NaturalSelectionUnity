@@ -6,7 +6,8 @@ public class BugReproductionScript : MonoBehaviour
 {
     [SerializeField]
     GameState gameState;
-    public GameObject bugPrefab;
+    public GameObject bugPrefabPurple;
+    public GameObject bugPrefabGreen;
     public float reproductionCooldown = 1f; // Cooldown period for bug reproduction
     private float reproductionTimer = 0f; // Timer for tracking reproduction cooldown
 
@@ -23,7 +24,7 @@ public class BugReproductionScript : MonoBehaviour
             BugReproductionScript otherBug = collision.gameObject.GetComponent<BugReproductionScript>();
 
             // Check if both bugs are eligible for reproduction
-            if (reproductionTimer >= reproductionCooldown && otherBug.reproductionTimer >= otherBug.reproductionCooldown)
+            if (reproductionTimer >= reproductionCooldown && otherBug.reproductionTimer >= otherBug.reproductionCooldown && gameState.currentPop < gameState.maxPopSize)
             {
                 // Determine alleles of the offspring based on Punnett square
                 AlleleType offspringAllele = DetermineOffspringAllele(GetComponent<BugAlleleScript>().alleleType, otherBug.GetComponent<BugAlleleScript>().alleleType);
@@ -121,25 +122,38 @@ public class BugReproductionScript : MonoBehaviour
 
     void SpawnOffspringBug(AlleleType allele, Vector2 position)
     {
+        GameObject offspringBug;
         // Spawn a new bug GameObject with the determined allele at the specified position
-        GameObject offspringBug = Instantiate(bugPrefab, position, Quaternion.identity);
+        if(gameState.isGreenSelected)
+        {
+            if (allele == AlleleType.Dom || allele == AlleleType.Mid)
+            {
+                offspringBug = Instantiate(bugPrefabGreen, position, Quaternion.identity);
+            }
+            else
+            {
+                offspringBug = Instantiate(bugPrefabPurple, position, Quaternion.identity);
+            }
+        }
+        else
+        {
+            if (allele == AlleleType.Dom || allele == AlleleType.Mid)
+            {
+                offspringBug = Instantiate(bugPrefabPurple, position, Quaternion.identity);
+            }
+            else
+            {
+                offspringBug = Instantiate(bugPrefabGreen, position, Quaternion.identity);
+            }
+        }
+        
+
+        
         offspringBug.GetComponent<BugAlleleScript>().alleleType = allele;
 
         
         
 
-        // Assign the appropriate color based on allele type
-        switch (allele)
-        {
-            case AlleleType.Dom:
-                offspringBug.GetComponent<Renderer>().material.color = gameState.domColor;
-                break;
-            case AlleleType.Mid:
-                offspringBug.GetComponent<Renderer>().material.color = gameState.domColor;
-                break;
-            case AlleleType.Rec:
-                offspringBug.GetComponent<Renderer>().material.color = gameState.recColor;
-                break;
-        }
+        
     }
 }

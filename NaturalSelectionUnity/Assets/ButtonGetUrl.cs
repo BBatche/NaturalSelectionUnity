@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class ButtonGetUrl : MonoBehaviour
 {
-    public void OnButtonClick()
+    public GameState gameState; 
+
+    public void ExportToExcel()
     {
-        Application.OpenURL("http://localhost:5073/api/Simulations/ExportSim");
+        string baseURL = "http://localhost:5073/api/SettingsGenerations/ExportSettingsAndGenerationsToExcel?userEmail=";
+        string userEmail = gameState.userEmail; 
+
+        
+        string fullURL = baseURL + userEmail;
+
+        Application.OpenURL(fullURL);
     }
 }

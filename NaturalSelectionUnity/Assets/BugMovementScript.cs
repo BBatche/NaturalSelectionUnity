@@ -28,6 +28,9 @@ public class BugMovementScript : MonoBehaviour
         // Set linear velocity for the bug
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         rb.velocity = randomDirection * gameState.speed;
+
+        // Rotate the bug to face its movement direction
+        transform.up = rb.velocity.normalized;
     }
 
     void SetRandomMovement()
@@ -40,12 +43,14 @@ public class BugMovementScript : MonoBehaviour
         while (true)
         {
             // Calculate random velocity within a range
-            
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             rb.velocity = randomDirection * gameState.speed;
 
-            // Wait for one second
-            yield return new WaitForSeconds(1f);
+            // Rotate the bug to face its movement direction
+            transform.up = rb.velocity.normalized;
+
+            
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
 
             // Reverse direction
             rb.velocity *= -1;

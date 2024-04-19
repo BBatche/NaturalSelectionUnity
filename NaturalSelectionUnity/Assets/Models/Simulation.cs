@@ -7,15 +7,9 @@ namespace NaturalSelectionUnity.Models.Simulation
 {
     public partial class Simulation
     {
-        public int SimulationId { get; set; }
+        public string SimulationId { get; set; } = null!;
 
-        public int SettingsId { get; set; }
-
-        public DateTime? StartTime { get; set; }
-
-        public DateTime? EndTime { get; set; }
-
-        public bool? IsActive { get; set; }
+        public string SettingsId { get; set; } = null!;
 
         public string? UserEmail { get; set; }
     }

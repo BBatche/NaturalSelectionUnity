@@ -22,15 +22,15 @@ public class SimulationSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gameState.isWhiteSelected)
+        if(gameState.isGreenSelected)
         {
-            Color fuckyou = new Color(.1f, .1f, .1f, 1f);
-            background.GetComponent<SpriteRenderer>().color = fuckyou;
+            Color fu = new Color(0f, 1f, 0f, 1f);
+            background.GetComponent<SpriteRenderer>().color = fu;
         }
         else
         {
-            Color fuckyou2 = new Color(.9f, .9f, .9f, 1f);
-            background.GetComponent<SpriteRenderer>().color = fuckyou2;
+            Color fu2 = new Color(0.7024794f, 0f, 1f, 1f);
+            background.GetComponent<SpriteRenderer>().color = fu2;
         }
 
         if(!gameState.isManySelected)

@@ -7,10 +7,13 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using NaturalSelectionUnity.Models.Settings;
+using NaturalSelectionUnity.Models.Simulation;
 using UnityEngine.Networking;
 using static System.Net.WebRequestMethods;
 using Newtonsoft.Json;
 using System.Text;
+using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SettingsScript : MonoBehaviour
 {
@@ -47,16 +50,17 @@ public class SettingsScript : MonoBehaviour
     TMP_InputField initialbb;
 
     string apiUrl = "http://localhost:5073/api/Settings";
+    string simUrl = "http://localhost:5073/api/Simulations";
     // Start is called before the first frame update
     void Start()
     {
 
-        gameState.isWhiteSelected = false;
+        gameState.isGreenSelected = false;
         gameState.isFastSelected = false;
         gameState.isRandomSelected = false;
         gameState.isManySelected = false;
         gameState.initalPopSize = 0;
-        gameState.maxPopSize = 200;
+        gameState.maxPopSize = 300; 
         gameState.simStarted = false;
         gameState.speed = 1.5f;
         gameState.userEmail = string.Empty;
@@ -161,7 +165,7 @@ public class SettingsScript : MonoBehaviour
     {
         if (!gameState.simStarted)
         {
-            gameState.isWhiteSelected = false;
+            gameState.isGreenSelected = false;
 
             ColorBlock cbb = blackButton.colors;
             cbb.normalColor = Color.gray;
@@ -178,7 +182,7 @@ public class SettingsScript : MonoBehaviour
     {
         if (!gameState.simStarted)
         {
-            gameState.isWhiteSelected = true;
+            gameState.isGreenSelected = true;
 
             ColorBlock cb = blackButton.colors;
             cb.normalColor = Color.white;
@@ -195,16 +199,36 @@ public class SettingsScript : MonoBehaviour
         gameState.simStarted = true;
         Guid guid = Guid.NewGuid();
         gameState.simulationID = guid.ToString();
+        Guid guid2 = Guid.NewGuid();
+        gameState.settingID = guid2.ToString();
 
         Setting setting = new Setting();
         CreateSetting(setting);
         StartCoroutine(PostSettings(setting));
+        CreateSimulation();
+
         SceneManager.LoadScene("Simulation Screen");
 
     }
+    public IEnumerator LoadSim()
+    {
+        yield return new WaitForSeconds(5f);
+        
+    }
+    private void CreateSimulation()
+    {
+        Simulation sim = new Simulation();
+        sim.SimulationId = gameState.simulationID;
+        sim.SettingsId = gameState.settingID;
+        sim.UserEmail = gameState.userEmail;
+
+        StartCoroutine(PostSimulation(sim));
+    }
+    
 
     private void CreateSetting(Setting setting)
     {
+        setting.SettingsId = gameState.settingID;
         if (gameState.isFastSelected)
         {
             setting.MovementSpeed = 3;
@@ -229,7 +253,7 @@ public class SettingsScript : MonoBehaviour
         {
             setting.MovementType = "Linear";
         }
-        if (gameState.isWhiteSelected)
+        if (gameState.isGreenSelected)
         {
             setting.BackgroundColor = "Light";
         }
@@ -343,6 +367,32 @@ public class SettingsScript : MonoBehaviour
             else
             {
                 Debug.Log("Settings saved successfully!");
+            }
+        }
+    }
+    IEnumerator PostSimulation(Simulation sim)
+    {
+        string jsonData = JsonConvert.SerializeObject(sim);
+
+        // Create a UnityWebRequest instance using the POST method
+        using (UnityWebRequest request = new UnityWebRequest(simUrl, "POST"))
+        {
+            // Set the request body
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            // Send the request asynchronously
+            yield return request.SendWebRequest();
+
+            // Check for errors
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error posting simulation: " + request.error);
+            }
+            else
+            {
+                Debug.Log("Simulation posted successfully!");
             }
         }
     }

@@ -7,7 +7,7 @@ namespace NaturalSelectionUnity.Models.Settings
 
     public partial class Setting
     {
-        public int SettingsId { get; set; }
+        public string SettingsId { get; set; } = null!;
 
         public int? MovementSpeed { get; set; }
 

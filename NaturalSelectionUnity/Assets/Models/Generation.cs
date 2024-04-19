@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace NaturalSelectionUnity.Models.Generation
 {
 
@@ -9,7 +10,7 @@ namespace NaturalSelectionUnity.Models.Generation
     {
         public int GenerationId { get; set; }
 
-        public int SimulationId { get; set; }
+        public string SimulationId { get; set; } = null!;
 
         public int? GenerationNum { get; set; }
 

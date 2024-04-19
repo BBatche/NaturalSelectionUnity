@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21184b53d2c99c4a9ab7edcb10e93c5, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  isWhiteSelected: 1
+  isGreenSelected: 0
   isFastSelected: 1
   isRandomSelected: 0
   isManySelected: 0
   initalPopSize: 0
-  initialBB: 10
-  initialBb: 25
-  initialbb: 10
-  maxPopSize: 200
-  simStarted: 0
-  speed: 1.5
-  userEmail: 
-  simulationID: 08682edc-4a3a-429f-bc9c-abcf6a657517
-  currentPop: 505
-  currentDom: 239
-  currentMid: 218
-  currentRec: 48
-  killedByKillZone: 342
-  killedByPlayer: 8
-  currentGen: 11
-  domColor: {r: 0.12156863, g: 0.25490198, b: 0.12941177, a: 1}
-  recColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
+  initialBB: 8
+  initialBb: 8
+  initialbb: 8
+  maxPopSize: 300
+  simStarted: 1
+  speed: 3
+  userEmail: TestPostGuids
+  simulationID: 1034418c-b451-4ee4-a44e-61649617338c
+  settingID: 86d3e797-fc4f-40cb-b417-e1ae3ce93c0d
+  currentPop: 3
+  currentDom: 3
+  currentMid: 0
+  currentRec: 0
+  killedByKillZone: 39
+  killedByPlayer: 1
+  currentGen: 7
+  domColor: {r: 1, g: 1, b: 1, a: 1}
+  recColor: {r: 0, g: 0, b: 0, a: 1}

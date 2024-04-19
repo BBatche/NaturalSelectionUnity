@@ -75,6 +75,8 @@ public class BugCollisionHandler : MonoBehaviour
 
         // Reflect the bug's velocity based on the collision normal
         rb.velocity = Vector2.Reflect(rb.velocity, collisionNormal);
+
+        transform.up = rb.velocity.normalized;
     }
 
 
