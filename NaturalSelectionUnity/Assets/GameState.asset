@@ -26,12 +26,12 @@ MonoBehaviour:
   userEmail: TestPostGuids
   simulationID: 1034418c-b451-4ee4-a44e-61649617338c
   settingID: 86d3e797-fc4f-40cb-b417-e1ae3ce93c0d
-  currentPop: 3
-  currentDom: 3
-  currentMid: 0
+  currentPop: 15
+  currentDom: 8
+  currentMid: 7
   currentRec: 0
-  killedByKillZone: 39
-  killedByPlayer: 1
-  currentGen: 7
+  killedByKillZone: 10
+  killedByPlayer: 7
+  currentGen: 2
   domColor: {r: 1, g: 1, b: 1, a: 1}
   recColor: {r: 0, g: 0, b: 0, a: 1}
